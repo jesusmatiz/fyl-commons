@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+   <!-- PARAMETER LIST
+     name - mandatory
+     label - optional
+     backingBean - optional
+     actionListener - optional
+   -->
+
+   <ui:composition>
+
+      <c:if test="${empty label}">
+         <c:set var="label" value="${name}"/>
+      </c:if>
+
+      <h:column>
+         <h:outputLabel  id="label${name}"
+                         styleClass="texto_negro"
+                         for="button${name}"
+                         value="${label}"/>
+      </h:column>
+
+      <h:column>
+         <p:commandLink id="link${name}" ajaxSingle="true"
+                          actionListener="${backingBean[actionListener]}">
+            <ui:insert/>
+         </p:commandLink>
+      </h:column>
+   </ui:composition>
+</html>

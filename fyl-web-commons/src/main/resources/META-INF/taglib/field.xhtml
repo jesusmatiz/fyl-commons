@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <!-- PARAMETER LIST
+      name - mandatory
+      label - optional
+      required - optional
+      maxlength - optional
+      size - optional
+      backingBean - mandatory
+      rendered - optional
+      disabled - optional
+      autocomplete - off
+      validatorMessage-optional
+    -->
+
+    <ui:composition>
+        <c:if test="${empty label}">
+            <c:set var="label" value="${name}"/>
+        </c:if>
+
+        <c:if test="${empty autocomplete}">
+            <c:set var="autocomplete" value="off"/>
+        </c:if>
+
+        <c:if test="${empty required}">
+            <c:set var="required" value="true"/>
+        </c:if>
+
+        <c:if test="${empty size}">
+            <c:set var="size" value="30"/>
+        </c:if>
+
+        <c:if test="${empty maxlength}">
+            <c:set var="maxlength" value="30"/>
+        </c:if>
+
+        <c:if test="${empty rendered}">
+            <c:set var="rendered" value="true"/>
+        </c:if>
+
+        <c:if test="${empty disabled}">
+            <c:set var="disabled" value="false"/>
+        </c:if>
+
+        <c:if test="${empty labelStyleClass}">
+            <c:set var="labelStyleClass" value="texto_negro_oscuro"/>
+        </c:if>
+
+        <h:column rendered="${rendered}">
+            <c:if test="${required}">
+                <h:outputLabel  id="label${name}"
+                                styleClass="${labelStyleClass}"
+                                for="input${name}"
+                                value="* ${label}"/>
+            </c:if>
+            <c:if test="${not required}">
+                <h:outputLabel  id="label${name}"
+                                styleClass="${labelStyleClass}"
+                                for="input${name}"
+                                value="${label}"/>
+            </c:if>
+        </h:column>
+
+        <h:column rendered="${rendered}">
+            <c:if test="${empty validatorMessage}">
+                <h:inputText  id="input${name}"
+                              value="${backingBean[name]}"
+                              maxlength="${maxlength}"
+                              size="${size}"
+                              required="${required}"
+                              disabled="${disabled}"
+                              autocomplete="off">
+                    <ui:insert/>
+                </h:inputText>
+            </c:if>
+
+            <c:if test="${not empty validatorMessage}">
+                <h:inputText  id="input${name}"
+                              value="${backingBean[name]}"
+                              maxlength="${maxlength}"
+                              size="${size}"
+                              required="${required}"
+                              disabled="${disabled}"
+                              autocomplete="off"
+                              validatorMessage="${validatorMessage}">
+                    <ui:insert/>
+                </h:inputText>
+            </c:if>
+
+            <p:message for="input${name}">
+                <f:facet name="errorMarker">
+                    <h:graphicImage  value="/img/error.gif" />
+                </f:facet>
+            </p:message>
+        </h:column>
+    </ui:composition>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+   <!-- PARAMETER LIST
+     idObject - mandatory
+     backingBean - mandatory
+     action - mandatory
+     imageUrl - optional
+     swapImageUrl - optional
+     title - optional
+   -->
+
+   <ui:composition>
+      <t:column sortable="false">
+         <t:commandLink id="cl${idObject}"
+                        style="text-decoration:none"
+                        action="#{backingBean[action]}">
+            <ui:insert/>
+            <c:choose>
+               <c:when test="${not empty imageUrl and not empty swapImageUrl}">
+                  <t:swapImage url="${imageUrl}"
+                               swapImageUrl="${swapImageUrl}"
+                               border="none"
+                               title="${title}"
+                               alt="${title}"/>
+               </c:when>
+               <c:when test="${not empty imageUrl}">
+                  <t:graphicImage url="${imageUrl}"
+                                  border="none"
+                                  title="${title}"
+                                  alt="${title}"/>
+               </c:when>
+               <c:otherwise>
+               </c:otherwise>
+            </c:choose>
+         </t:commandLink>
+      </t:column>
+   </ui:composition>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <!-- PARAMETER LIST
+      name - mandatory
+      label - optional
+      value - mandatory
+      sourceList - mandatory
+      backingBean - mandatory
+      required - optional
+      rendered - optional
+      valueChangeListener - optional
+    -->
+    <ui:composition>
+        <c:if test="${empty label}">
+            <c:set var="label" value="${name}"/>
+        </c:if>
+
+        <c:if test="${empty required}">
+            <c:set var="required" value="true"/>
+        </c:if>
+
+        <c:if test="${empty labelStyleClass}">
+            <c:set var="labelStyleClass" value="texto_negro_oscuro"/>
+        </c:if>
+
+       <c:if test="${empty rendered}">
+         <c:set var="rendered" value="true"/>
+       </c:if>
+
+        <h:column>
+            <c:if test="${required}">
+                <h:outputLabel  id="label${name}"
+                                styleClass="${labelStyleClass}"
+                                for="combo${name}"
+                                value="* ${label}"
+                                rendered="${rendered}"/>
+            </c:if>
+            <c:if test="${not required}">
+                <h:outputLabel  id="label${name}"
+                                styleClass="${labelStyleClass}"
+                                for="combo${name}"
+                                value="${label}"
+                                rendered="${rendered}"/>
+            </c:if>
+        </h:column>
+        <h:column>
+            <c:if test="${not empty valueChangeListener}">
+                <p:selectOneMenu id="combo${name}" widgetVar="combo${name}"
+
+                                 required="${required}"
+                                 value="${backingBean[value]}"
+                                 valueChangeListener="${backingBean[valueChangeListener]}"
+                                 rendered="${rendered}">
+                    <f:selectItem itemValue="" itemLabel="#{msg.null_value}"/>
+                    <f:selectItems value="${backingBean[sourceList]}"/>
+                    <ui:insert/>
+                </p:selectOneMenu>
+            </c:if>
+
+            <c:if test="${empty valueChangeListener}">
+                <p:selectOneMenu id="combo${name}"
+                                 widgetVar="combo${name}"
+                                 required="${required}"
+                                 value="${backingBean[value]}"
+                                 rendered="${rendered}" >
+                    <f:selectItem itemValue="" itemLabel="#{msg.null_value}"/>
+                    <f:selectItems value="${backingBean[sourceList]}" />
+                    <ui:insert/>
+                </p:selectOneMenu>
+            </c:if>
+
+            <c:if test="${required}">
+                <p:message for="combo${name}">
+                    <f:facet name="errorMarker">
+                        <h:graphicImage  value="/img/error.gif" />
+                    </f:facet>
+                </p:message>
+            </c:if>
+        </h:column>
+    </ui:composition>
+</html>

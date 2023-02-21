@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <!-- PARAMETER LIST
+      name - mandatory
+      label - optional
+      required - optional
+      backingBean - mandatory
+    -->
+    <ui:composition>
+        <c:if test="${empty label}">
+            <c:set var="label" value="${name}"/>
+        </c:if>
+
+        <c:if test="${empty required}">
+            <c:set var="required" value="true"/>
+        </c:if>
+        <h:column>
+            <c:if test="${required and label!='' and label!=' '}">
+                <p:outputLabel  id="label${name}"
+                                for="date${name}"
+                                value="* ${label}"/>
+            </c:if>
+            <c:if test="${not (required and label!='' and label!=' ')}">
+                <p:outputLabel  id="label${name}"
+                                for="date${name}"
+                                value="${label}"/>
+            </c:if>
+        </h:column>
+        <h:column>
+            <p:calendar id="date${name}" value="${backingBean[name]}"
+                           pattern="dd/MM/yyyy" required="${required}"/>
+            <p:message for="date${name}">
+                <f:facet name="errorMarker">
+                    <p:graphicImage  value="/img/error.gif" />
+                </f:facet>
+            </p:message>
+
+        </h:column>
+    </ui:composition>
+</html>

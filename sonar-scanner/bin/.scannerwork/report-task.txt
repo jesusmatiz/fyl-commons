@@ -1,0 +1,6 @@
+projectKey=fylcomonsy:ids
+serverUrl=http://20.185.194.129
+serverVersion=9.9.0.65466
+dashboardUrl=http://20.185.194.129/dashboard?id=fylcomonsy%3Aids
+ceTaskId=AYZ0uvIhcdypBpMgVs0H
+ceTaskUrl=http://20.185.194.129/api/ce/task?id=AYZ0uvIhcdypBpMgVs0H

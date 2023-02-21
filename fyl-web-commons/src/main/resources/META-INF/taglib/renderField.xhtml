@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+   <!-- PARAMETER LIST
+     name - mandatory
+     label - optional
+     required - optional
+     maxlength - optional
+     size - optional
+     backingBean - mandatory
+     rendered - optional
+     validatorMessage-optional
+     autocomplete - off
+   -->
+
+   <ui:composition>
+      <c:if test="${empty label}">
+         <c:set var="label" value="${name}"/>
+      </c:if>
+
+        <c:if test="${empty autocomplete}">
+            <c:set var="autocomplete" value="off"/>
+        </c:if>
+
+      <c:if test="${empty required}">
+         <c:set var="required" value="true"/>
+      </c:if>
+
+      <c:if test="${empty size}">
+         <c:set var="size" value="30"/>
+      </c:if>
+
+      <c:if test="${empty maxlength}">
+         <c:set var="maxlength" value="30"/>
+      </c:if>
+
+      <c:if test="${empty rendered}">
+         <c:set var="rendered" value="true"/>
+      </c:if>
+
+      <p:outputPanel id="colLabel${name}">
+         <p:outputLabel  id="label${name}"
+                         for="input${name}"
+                         value="${label}"
+                         rendered="${rendered}"/>
+      </p:outputPanel>
+
+      <p:outputPanel id="colInput${name}">
+         
+         <c:if test="${empty validatorMessage}">
+             <p:inputText  id="input${name}"
+                           value="${backingBean[name]}"
+                           maxlength="${maxlength}"
+                           size="${size}"
+                           autocomplete="off"
+                           required="${required}"
+                           rendered="${rendered}">
+                <ui:insert/>
+             </p:inputText>
+         </c:if>
+         <c:if test="${not empty validatorMessage}">
+             <p:inputText  id="input${name}"
+                           value="${backingBean[name]}"
+                           maxlength="${maxlength}"
+                           size="${size}"
+                           required="${required}"
+                           rendered="${rendered}"
+                           autocomplete="off"
+                           validatorMessage="${validatorMessage}">
+                <ui:insert/>
+             </p:inputText>
+         </c:if>
+
+         <p:message for="input${name}">
+            <f:facet name="errorMarker">
+               <p:graphicImage  value="/img/error.gif" />
+            </f:facet>
+         </p:message>
+      </p:outputPanel>
+
+   </ui:composition>
+</html>

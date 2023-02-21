@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<h:panelGrid columns="1">
+		<c:if test="${empty id}">
+	    	<p:messages passedLabel="Data is allowed to be stored."
+				layout="list" styleClass="message" globalOnly="true" rendered="true">
+				<f:facet name="header">
+					<h:outputText value="Entered Data Status:"></h:outputText>
+				</f:facet>
+				<f:facet name="infoMarker">
+					<p:graphicImage name="/img/passed.gif" />
+				</f:facet>
+				<f:facet name="errorMarker">
+					<p:graphicImage name="/img/error.gif" />
+				</f:facet>
+				<f:facet name="passedMarker">
+					<p:graphicImage name="/img/passed.gif" />
+				</f:facet>
+			</p:messages>        
+	    </c:if>
+		<c:if test="${not empty id}">
+	    	<p:messages id="${id}"  passedLabel="Data is allowed to be stored."
+				layout="list" styleClass="message" globalOnly="true" rendered="true">
+				<f:facet name="header">
+					<h:outputText value="Entered Data Status:"></h:outputText>
+				</f:facet>
+				<f:facet name="infoMarker">
+					<p:graphicImage name="/img/passed.gif" />
+				</f:facet>
+				<f:facet name="errorMarker">
+					<p:graphicImage name="/img/error.gif" />
+				</f:facet>
+				<f:facet name="passedMarker">
+					<p:graphicImage name="/img/passed.gif" />
+				</f:facet>
+			</p:messages>        
+	    </c:if>
+	</h:panelGrid>
+</ui:composition>
+</html>

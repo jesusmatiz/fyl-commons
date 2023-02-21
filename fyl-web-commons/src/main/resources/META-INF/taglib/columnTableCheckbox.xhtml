@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+   <!-- PARAMETER LIST
+     id - optional
+     header - mandatory
+     property - mandatory
+     sortable - optional
+     backingBean - mandatory
+   -->
+
+   <ui:composition>
+      <c:if test="${empty id}">
+         <c:set var="id" value="property"/>
+      </c:if>
+
+      <c:if test="${empty sortable}">
+         <c:set var="sortable" value="false"/>
+      </c:if>
+
+      <h:column style="align: center;" selfSorted="${sortable}" sortBy="${backingBean[property]}">
+         <c:if test="${not empty header}">
+            <f:facet name="header">
+               <h:outputText value="${header}"/>
+            </f:facet>
+         </c:if>
+
+         <p:selectBooleanCheckbox value="${backingBean[property]}">
+            <ui:insert/>
+         </p:selectBooleanCheckbox>
+      </h:column>
+   </ui:composition>
+</html>

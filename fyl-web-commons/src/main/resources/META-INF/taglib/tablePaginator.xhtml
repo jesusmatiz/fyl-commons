@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+   <!-- PARAMETER LIST
+     idTable - mandatory
+   -->
+
+   <ui:composition>
+      <t:htmlTag value="div align='center'">
+         <t:dataScroller   for="${idTable}" fastStep="10"
+                           pageCountVar="pageCount" pageIndexVar="pageIndex"
+                           paginatorActiveColumnStyle="paginator_active"
+                           paginatorColumnClass="paginator" paginator="true"
+                           paginatorMaxPages="9" renderFacetsIfSinglePage="false">
+            <f:facet name="first">
+               <t:swapImage url="images/primero.png"
+                            swapImageUrl="images/primero_over.png" border="none"
+                            title="#{msg.primero}" alt="#{msg.primero}" />
+            </f:facet>
+            <f:facet name="previous">
+               <t:swapImage url="images/anterior.png"
+                            swapImageUrl="images/anterior_over.png" border="none"
+                            title="#{msg.anterior}" alt="#{msg.anterior}" />
+            </f:facet>
+            <f:facet name="next">
+               <t:swapImage url="images/siguiente.png"
+                            swapImageUrl="images/siguiente_over.png" border="none"
+                            title="#{msg.siguiente}" alt="#{msg.siguiente}" />
+            </f:facet>
+            <f:facet name="last">
+               <t:swapImage url="images/ultimo.png"
+                            swapImageUrl="images/ultimo_over.png" border="none"
+                            title="#{msg.ultimo}" alt="#{msg.ultimo}" />
+            </f:facet>
+         </t:dataScroller>
+      </t:htmlTag>
+
+      <t:htmlTag value="div align='center'">
+         <t:dataScroller   for="${idTable}" pageCountVar="pageCount"
+                           pageIndexVar="pageIndex" displayedRowsCountVar="true"
+                           rowsCountVar="rows" renderFacetsIfSinglePage="false">
+            <h:outputFormat value="#{msg.numeros_pagina}"
+                            styleClass="data_pages">
+               <f:param value="#{pageIndex}" />
+               <f:param value="#{pageCount}" />
+            </h:outputFormat>
+         </t:dataScroller>
+      </t:htmlTag>
+   </ui:composition>
+</html>

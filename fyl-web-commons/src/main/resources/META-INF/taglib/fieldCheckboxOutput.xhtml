@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <!-- PARAMETER LIST
+      name - mandatory
+      label - optional
+      disabled - optional
+      readOnly-optional
+      onclick-optional
+      labelStyleClass - optional
+      checkBoxStyleClass - optional
+      backingBean - mandatory
+    -->
+
+    <ui:composition>
+        <c:if test="${empty label}">
+            <c:set var="label" value="${name}"/>
+        </c:if>
+
+        <c:if test="${empty disabled}">
+            <c:set var="disabled" value="false"/>
+        </c:if>
+
+        <c:if test="${empty readOnly}">
+            <c:set var="readOnly" value="false"/>
+        </c:if>
+
+        <c:if test="${empty onclick}">
+            <c:set var="onclick" value="javascript:;"/>
+        </c:if>
+
+        <c:if test="${empty labelStyleClass}">
+            <c:set var="labelStyleClass" value="texto_negro_oscuro"/>
+        </c:if>
+
+        <c:if test="${empty checkBoxStyleClass}">
+            <c:set var="checkBoxStyleClass" value="texto_negro"/>
+        </c:if>
+
+        <h:column >
+            <h:outputLabel  id="labelInputSelectBooleanCheckBox${name}"
+                            styleClass="${labelStyleClass}"
+                            for="inputSelectBooleanCheckBox${name}"
+                            value="${label}"/>
+        </h:column>
+
+        <h:column>
+            <h:selectBooleanCheckbox id="inputSelectBooleanCheckBox${name}"
+                                     value="${backingBean[name]}"
+                                     disabled="${disabled}"
+                                     readOnly="${readOnly}"
+                                     styleClass="${checkBoxStyleClass}"
+                                     onclick="${onclick}">
+                <ui:insert/>
+            </h:selectBooleanCheckbox>
+            <p:message for="inputSelectBooleanCheckBox${name}">
+                <f:facet name="errorMarker">
+                    <h:graphicImage  value="/img/error.gif" />
+                </f:facet>
+            </p:message>
+        </h:column>
+    </ui:composition>
+</html>

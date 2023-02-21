@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<!-- PARAMETER LIST
+     name - mandatory
+     label - optional
+     value - mandatory
+	 labelStyleClass - optional
+	 outputStyleClass - optional
+   -->
+
+<ui:composition>
+	<c:if test="${empty label}">
+		<c:set var="label" value="${name}" />
+	</c:if>
+
+	<c:if test="${empty labelStyleClass}">
+		<c:set var="labelStyleClass" value="texto_negro" />
+	</c:if>
+
+	<c:if test="${empty outputStyleClass}">
+		<c:set var="outputStyleClass" value="texto_negro" />
+	</c:if>
+
+	<h:column>
+		<h:outputLabel id="label${name}" styleClass="${labelStyleClass}"
+			for="output${name}" value="${label}" />
+	</h:column>
+
+	<h:column>
+		<h:outputText id="output${name}" value="${value}"
+			styleClass="${outputStyleClass}">
+			<ui:insert />
+		</h:outputText>
+	</h:column>
+</ui:composition>
+</html>

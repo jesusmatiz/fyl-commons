@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+   <!-- PARAMETER LIST
+     name - mandatory
+     label - optional
+     backingBean - optional
+     readonly - optional
+     styleClass - optional
+     rendered - optional
+   -->
+
+   <ui:composition>
+      <c:if test="${empty label}">
+         <c:set var="label" value="${name}"/>
+      </c:if>
+
+      <c:if test="${empty readonly}">
+         <c:set var="readonly" value="false"/>
+      </c:if>
+
+      <c:if test="${empty disabled}">
+         <c:set var="disabled" value="false"/>
+      </c:if>
+
+      <c:if test="${empty styleClass}">
+         <c:set var="styleClass" value="texto_negro"/>
+      </c:if>
+
+      <c:if test="${empty rendered}">
+         <c:set var="rendered" value="true"/>
+      </c:if>
+
+      <h:column rendered="${rendered}">
+         <h:outputLabel  id="label${name}"
+                         styleClass="${styleClass}"
+                         for="check${name}"
+                         value="${label}"/>
+      </h:column>
+
+      <h:column rendered="${rendered}">
+         <c:if test="${readonly}">
+            <c:set var="onclick" value="return false;"/>
+         </c:if>
+		 
+		 <c:if test="${disabled}">
+			<c:set var="onclick" value="return false;"/>
+		 </c:if>
+
+         <c:if test="${empty backingBean}">
+            <h:selectBooleanCheckbox id="check${name}" onclick="${onclick}">
+               <ui:insert/>
+            </h:selectBooleanCheckbox>
+         </c:if>
+         <c:if test="${not empty backingBean}">
+            <h:selectBooleanCheckbox id="check${name}"
+                                     value="${backingBean[name]}"
+                                     onclick="${onclick}">
+               <ui:insert/>
+            </h:selectBooleanCheckbox>
+         </c:if>
+      </h:column>
+   </ui:composition>
+</html>
